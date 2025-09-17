@@ -1,0 +1,45 @@
+name: portfolio
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dotted_line: ^3.0.0
+  font_awesome_flutter: ^10.7.0
+  visibility_detector: ^0.4.0+2
+  flutter_staggered_grid_view: ^0.7.0
+  firebase_core: ^3.6.0
+  cloud_firestore: ^5.4.4
+  url_launcher: ^6.3.1
+  table_calendar: ^3.0.9
+  fl_chart: ^0.69.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/profile.png
+    - assets/images/clouds.jpeg
+    - assets/images/coding_bg.jpg
+    - assets/images/robot_sheet.png
+    - assets/images/alkhidmat.png
+    - assets/images/aps.png
+    - assets/images/gcp.jpeg
+
+  fonts:
+    - family: font1
+      fonts:
+        - asset: assets/fonts/Alkia.ttf
+    - family: font2
+      fonts:
+        - asset: assets/fonts/RockabyeRegular-K7Zqy.otf
