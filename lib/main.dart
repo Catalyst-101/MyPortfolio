@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/desktop/screens/about_me/about_me.dart';
-import 'package:portfolio/desktop/screens/admin_dashboard/dashboard.dart';
 import 'package:portfolio/desktop/screens/contact/contact.dart';
 import 'package:portfolio/desktop/screens/faqs/faqs.dart';
 import 'package:portfolio/desktop/screens/home_page/home_page.dart';
 import 'package:portfolio/desktop/screens/myprojects/myprojects.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
-  // Ensure Flutter is fully initialized before Firebase
+void main() async 
+{
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase with your web config
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: "AIzaSyA_tcrx7uP7DiBYSDTqwe2QuS7-VlRNiXM",
@@ -43,10 +41,6 @@ class MyApp extends StatelessWidget
         Widget page;
         switch (settings.name) 
         {
-
-          case '/admin-503774':
-            page = Dashboard();
-            break;
 
           case '/faqs':
             page = FAQs();

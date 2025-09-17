@@ -50,7 +50,7 @@ class AboutMeDesktopTablet extends StatelessWidget {
                 Text(
                   "A Little About Me",
                   style: TextStyle(
-                    fontSize: isTablet ? 24 : 32,
+                    fontSize: isTablet ? 22 : 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -64,7 +64,7 @@ class AboutMeDesktopTablet extends StatelessWidget {
                   "to people in a meaningful way.",
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    fontSize: isTablet ? 14 : 18,
+                    fontSize: isTablet ? 12 : 18,
                     color: Colors.white70,
                     height: 1.6,
                   ),
@@ -76,8 +76,8 @@ class AboutMeDesktopTablet extends StatelessWidget {
                     backgroundColor: Colors.deepOrange,
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(
-                      horizontal: isTablet ? 20 : 28,
-                      vertical: isTablet ? 12 : 14,
+                      horizontal: isTablet ? 18 : 28,
+                      vertical: isTablet ? 10 : 14,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -85,7 +85,7 @@ class AboutMeDesktopTablet extends StatelessWidget {
                   ),
                   child: Text(
                     "More Info About Me",
-                    style: TextStyle(fontSize: isTablet ? 14 : 16),
+                    style: TextStyle(fontSize: isTablet ? 12 : 16),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -101,7 +101,7 @@ class AboutMeDesktopTablet extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: isTablet ? 20 : 40),
+          SizedBox(width: isTablet ? 18 : 40),
           Expanded(
             flex: 1,
             child: Align(

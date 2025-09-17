@@ -35,18 +35,19 @@ class BodyDesktop extends StatelessWidget
     final isTablet = screenWidth < 900;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: isTablet ? 40 : 60),
+      padding: EdgeInsets.symmetric(horizontal: isTablet ? 38 : 60),
       child: Column(
         children: [
-          SizedBox(height: isTablet ? 40 : 50),
+          SizedBox(height: isTablet ? 38 : 50),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 flex: 1,
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: isTablet ? 12 : 16),
+                    padding: EdgeInsets.symmetric(horizontal: isTablet ? 10 : 16),
                     child: BouncingProfileImage(
                       height: isTablet ? 300 : 400,
                       width: isTablet ? 180 : 240,
@@ -57,7 +58,7 @@ class BodyDesktop extends StatelessWidget
               Expanded(
                 flex: 2,
                 child: Padding(
-                  padding: EdgeInsets.all(isTablet ? 12.0 : 16.0),
+                  padding: EdgeInsets.all(isTablet ? 10.0 : 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,30 +66,30 @@ class BodyDesktop extends StatelessWidget
                         "Hello, I'm",
                         style: TextStyle(
                           color: Colors.white70,
-                          fontSize: isTablet ? 20 : 22,
+                          fontSize: isTablet ? 18 : 22,
                         ),
                       ),
                       Text(
                         'Saad Muhammad Khan',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: isTablet ? 30 : 36,
+                          fontSize: isTablet ? 28 : 36,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(height: 10),
-                      TypingTextWithCursor(fontSize: isTablet ? 20 : 22),
-                      SizedBox(height: isTablet ? 18 : 20),
+                      TypingTextWithCursor(fontSize: isTablet ? 18 : 22),
+                      SizedBox(height: isTablet ? 16 : 20),
                       Text(
                         'I build high-performance, cross-platform apps with Flutter, delivering modern, responsive designs and seamless user experiences across mobile, web, and desktop. Skilled in clean UI, smooth performance, and practical, real-world solutions.',
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                           color: Colors.white60,
-                          fontSize: isTablet ? 15 : 16,
+                          fontSize: isTablet ? 13 : 16,
                           height: 1.5,
                         ),
                       ),
-                      SizedBox(height: isTablet ? 25 : 30),
+                      SizedBox(height: isTablet ? 23 : 30),
                       Row(
                         children: [
                           ButtonsRow(center: false),

@@ -110,15 +110,18 @@ class TimelineItem extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    if (screenWidth < 800) {
-      return Column(
-        children: [
-          const SizedBox(height: 20),
-          _buildTimelineNode(),
-          const SizedBox(height: 20),
-          PhaseCard(year: year, title: title, desc: desc),
-          if (!isLast) const SizedBox(height: 40),
-        ],
+    if (screenWidth < 800) 
+    {
+      return Center(
+        child: Column(
+          children: [
+
+            _buildTimelineNode(),
+
+            PhaseCard(year: year, title: title, desc: desc),
+            
+          ],
+        ),
       );
     }
 
