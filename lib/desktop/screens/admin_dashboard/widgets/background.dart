@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/desktop/utilities/gradient_pallete.dart';
 import 'package:portfolio/desktop/external_widgets/falling_particles.dart';
 import 'package:portfolio/desktop/external_widgets/rainbow_cursor_wrapper.dart';
+import 'package:portfolio/app_theme_controller.dart';
 
 class Background extends StatelessWidget {
   final List<Widget> children;
@@ -20,6 +21,7 @@ class Background extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final double width = size.width.clamp(0, maxWidth);
     final double height = size.height.clamp(0, maxHeight);
+    final isDark = AppThemeController.instance.isDark.value;
 
     return RainbowCursorWrapper(
       child: Container(
@@ -31,7 +33,7 @@ class Background extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-            gradient: GradientPalette(index: 0, isDark: true).gradient,
+            gradient: GradientPalette(index: 0, isDark: isDark).gradient,
           ),
           child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -47,7 +49,7 @@ class Background extends StatelessWidget {
                     children: [
                       FallingParticles(numberOfParticles: 200),
                       Container(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: (isDark ? Colors.black : Colors.white).withValues(alpha: 0.2),
                         child: Row(
                           children: children,
                         ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/desktop/helper_classes/responsive_layout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomFooter extends StatelessWidget {
   const CustomFooter({super.key});
 
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     return ResponsiveLayout(
       mobile: const CustomFooterMobile(),
       desktop: const CustomFooterDesktop(),
@@ -16,14 +16,11 @@ class CustomFooter extends StatelessWidget {
   }
 }
 
-
-class CustomFooterDesktop extends StatelessWidget
-{
+class CustomFooterDesktop extends StatelessWidget {
   const CustomFooterDesktop({super.key});
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     final year = DateTime.now().year.toString().substring(2);
 
     return Container(
@@ -31,12 +28,10 @@ class CustomFooterDesktop extends StatelessWidget
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
       child: Column(
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               const Text(
                 "KHAN BHAI",
                 style: TextStyle(
@@ -45,33 +40,28 @@ class CustomFooterDesktop extends StatelessWidget
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               Row(
                 children: [
-                  footerLink("Home", "https://example.com/home"),
-                  footerLink("My Projects", "https://example.com/projects"),
-                  footerLink("Khan News", "https://example.com/news"),
-                  footerLink("FAQs", "https://example.com/faqs"),
-                  footerLink("About Me", "https://example.com/about"),
-                  footerLink("Contact Me", "https://example.com/contact"),
+                  footerLink(context, "Home", "/"),
+                  footerLink(context, "My Projects", "/myprojects"),
+                  footerLink(context, "FAQs", "/faqs"),
+                  footerLink(context, "About Me", "/aboutme"),
+                  footerLink(context, "Contact Me", "/contact"),
                 ],
               ),
-
               Row(
                 children: [
-                  socialIcon(FontAwesomeIcons.github, "https://github.com/"),
+                  socialIcon(FontAwesomeIcons.github, "https://github.com/Catalyst-101"),
                   const SizedBox(width: 15),
-                  socialIcon(FontAwesomeIcons.linkedin, "https://linkedin.com/"),
+                  socialIcon(FontAwesomeIcons.linkedin, "https://www.linkedin.com/in/smk-cs24/"),
                   const SizedBox(width: 15),
-                  socialIcon(Icons.email, "mailto:someone@example.com"),
+                  socialIcon(Icons.email, "https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there"),
                 ],
               ),
             ],
           ),
-
           const SizedBox(height: 20),
           const Divider(color: Colors.white24),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -81,14 +71,12 @@ class CustomFooterDesktop extends StatelessWidget
               ),
               Row(
                 children: [
-                  footerLink("Privacy & Policy", "https://example.com/privacy"),
+                  footerLink(context, "Privacy & Policy", "https://example.com/privacy"),
                 ],
               ),
             ],
           ),
-
           const SizedBox(height: 20),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -105,10 +93,18 @@ class CustomFooterDesktop extends StatelessWidget
     );
   }
 
-  Widget footerLink(String text, String url)
-  {
+  Widget footerLink(BuildContext context, String text, String url) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        if (url.startsWith('/')) {
+          Navigator.pushNamed(context, url); // internal route
+        } else {
+          final uri = Uri.parse(url);
+          if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+            debugPrint('Could not launch $url');
+          }
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Text(
@@ -122,10 +118,14 @@ class CustomFooterDesktop extends StatelessWidget
     );
   }
 
-  Widget socialIcon(IconData icon, String url)
-  {
+  Widget socialIcon(IconData icon, String url) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        final uri = Uri.parse(url);
+        if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+          debugPrint('Could not launch $url');
+        }
+      },
       child: Icon(
         icon,
         color: Colors.white70,
@@ -156,50 +156,38 @@ class CustomFooterMobile extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 20),
-
           Column(
             children: [
-              footerLink("Home", "https://example.com/home"),
-              footerLink("My Projects", "https://example.com/projects"),
-              footerLink("Khan News", "https://example.com/news"),
-              footerLink("FAQs", "https://example.com/faqs"),
-              footerLink("About Me", "https://example.com/about"),
-              footerLink("Contact Me", "https://example.com/contact"),
+              footerLink(context, "Home", "/"),
+              footerLink(context, "My Projects", "/myprojects"),
+              footerLink(context, "FAQs", "/faqs"),
+              footerLink(context, "About Me", "/aboutme"),
+              footerLink(context, "Contact Me", "/contact"),
             ],
           ),
-
           const SizedBox(height: 20),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              socialIcon(FontAwesomeIcons.github, "https://github.com/"),
+              socialIcon(FontAwesomeIcons.github, "https://github.com/Catalyst-101"),
               const SizedBox(width: 15),
-              socialIcon(FontAwesomeIcons.linkedin, "https://linkedin.com/"),
+              socialIcon(FontAwesomeIcons.linkedin, "https://www.linkedin.com/in/smk-cs24/"),
               const SizedBox(width: 15),
-              socialIcon(Icons.email, "mailto:someone@example.com"),
+              socialIcon(Icons.email, "https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there"),
             ],
           ),
-
           const SizedBox(height: 20),
           const Divider(color: Colors.white24),
-
           const SizedBox(height: 10),
-
           Text(
             "© 20$year Khan Bhai. All Rights Reserved.",
             style: const TextStyle(color: Colors.white70, fontSize: 12),
             textAlign: TextAlign.center,
           ),
-
           const SizedBox(height: 10),
-
-          footerLink("Privacy & Policy", "https://example.com/privacy"),
-
+          footerLink(context, "Privacy & Policy", "https://example.com/privacy"),
           const SizedBox(height: 20),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -216,9 +204,18 @@ class CustomFooterMobile extends StatelessWidget {
     );
   }
 
-  Widget footerLink(String text, String url) {
+  Widget footerLink(BuildContext context, String text, String url) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        if (url.startsWith('/')) {
+          Navigator.pushNamed(context, url);
+        } else {
+          final uri = Uri.parse(url);
+          if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+            debugPrint('Could not launch $url');
+          }
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: Text(
@@ -234,7 +231,12 @@ class CustomFooterMobile extends StatelessWidget {
 
   Widget socialIcon(IconData icon, String url) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        final uri = Uri.parse(url);
+        if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+          debugPrint('Could not launch $url');
+        }
+      },
       child: Icon(
         icon,
         color: Colors.white70,
@@ -243,4 +245,3 @@ class CustomFooterMobile extends StatelessWidget {
     );
   }
 }
-

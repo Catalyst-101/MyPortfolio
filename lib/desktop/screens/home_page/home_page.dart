@@ -4,7 +4,7 @@ import 'package:portfolio/desktop/screens/home_page/widgets/aboutme_widget.dart'
 import 'package:portfolio/desktop/screens/home_page/widgets/body.dart';
 import 'package:portfolio/desktop/external_widgets/footer.dart';
 import 'package:portfolio/desktop/screens/home_page/widgets/faqs_section.dart';
-import 'package:portfolio/desktop/screens/home_page/widgets/khan_news.dart';
+// import 'package:portfolio/desktop/screens/home_page/widgets/khan_news.dart';
 import 'package:portfolio/desktop/screens/home_page/widgets/portfolio_timeline.dart';
 import 'package:portfolio/desktop/screens/home_page/widgets/skill_section.dart';
 

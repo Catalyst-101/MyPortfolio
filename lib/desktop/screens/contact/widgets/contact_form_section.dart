@@ -1,4 +1,3 @@
-// ====================== FRONTEND: Contact Form UI ======================
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -214,27 +213,23 @@ class _ContactFormSectionState extends State<ContactFormSection> {
                       _SocialIcon(
                           icon: FontAwesomeIcons.github,
                           label: "Github",
-                          onPressed: () {}),
+                          url: "https://github.com/Catalyst-101",),
                       _SocialIcon(
                           icon: FontAwesomeIcons.linkedinIn,
                           label: "LinkedIn",
-                          onPressed: () {}),
-                      _SocialIcon(
-                          icon: FontAwesomeIcons.pinterest,
-                          label: "Pinterest",
-                          onPressed: () {}),
+                          url: "https://www.linkedin.com/in/smk-cs24/"),
                       _SocialIcon(
                           icon: FontAwesomeIcons.instagram,
                           label: "Instagram",
-                          onPressed: () {}),
+                          url: ""),
                       _SocialIcon(
                           icon: FontAwesomeIcons.facebook,
                           label: "Facebook",
-                          onPressed: () {}),
+                          url: ""),
                       _SocialIcon(
                           icon: FontAwesomeIcons.twitter,
                           label: "Twitter",
-                          onPressed: () {}),
+                          url: ""),
                     ],
                   ),
                 ],
@@ -250,17 +245,17 @@ class _ContactFormSectionState extends State<ContactFormSection> {
 class _SocialIcon extends StatelessWidget {
   final IconData icon;
   final String label;
-  final VoidCallback onPressed;
+  final String url;
 
   const _SocialIcon(
-      {required this.icon, required this.label, required this.onPressed});
+      {required this.icon, required this.label, required this.url});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Link(icon: icon, size: 30, color: Colors.white, onPressed: onPressed),
+        Link(icon: icon, size: 30, color: Colors.white, url: url),
         const SizedBox(height: 8),
         Text(label,
             style: const TextStyle(color: Colors.white70, fontSize: 14)),

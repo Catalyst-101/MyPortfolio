@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Link extends StatefulWidget {
   final IconData icon;
   final double? size;
   final Color? color;
   final Color? outlineColor;
-  final VoidCallback? onPressed;
+  final String url;
 
   const Link({
     super.key,
@@ -13,7 +14,7 @@ class Link extends StatefulWidget {
     this.size,
     this.color,
     this.outlineColor,
-    this.onPressed,
+    required this.url
   });
 
   @override
@@ -22,6 +23,17 @@ class Link extends StatefulWidget {
 
 class _LinkState extends State<Link> {
   bool hovered = false;
+
+  Future<void> _openLink(String url) async {
+    final Uri? uri = Uri.tryParse(url);
+    if (uri == null) return;
+
+    await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+      webOnlyWindowName: '_blank',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +76,11 @@ class _LinkState extends State<Link> {
                 : [],
           ),
           child: IconButton(
-            onPressed: widget.onPressed ?? () {},
+            onPressed: () {
+              if (widget.url.trim().isNotEmpty) {
+                _openLink(widget.url);
+              }
+            },
             icon: Icon(
               widget.icon,
               size: widget.size ?? 24,

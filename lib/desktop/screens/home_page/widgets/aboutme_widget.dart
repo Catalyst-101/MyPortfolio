@@ -71,7 +71,7 @@ class AboutMeDesktopTablet extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {Navigator.pushNamed(context, "/aboutme");},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepOrange,
                     foregroundColor: Colors.white,
@@ -91,11 +91,11 @@ class AboutMeDesktopTablet extends StatelessWidget {
                 const SizedBox(height: 24),
                 Row(
                   children: [
-                    Link(icon: FontAwesomeIcons.github, onPressed: () {}),
+                    Link(icon: FontAwesomeIcons.github, url: "https://github.com/Catalyst-101",),
                     const SizedBox(width: 12),
-                    Link(icon: FontAwesomeIcons.linkedinIn, onPressed: () {}),
+                    Link(icon: FontAwesomeIcons.linkedinIn, url: "https://www.linkedin.com/in/smk-cs24/"),
                     const SizedBox(width: 12),
-                    Link(icon: Icons.email, onPressed: () {}),
+                    Link(icon: Icons.email, url: "https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there"),
                   ],
                 ),
               ],
@@ -167,7 +167,7 @@ class AboutMeMobile extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {Navigator.pushNamed(context, "/aboutme");},
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepOrange,
               foregroundColor: Colors.white,
@@ -182,11 +182,11 @@ class AboutMeMobile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Link(icon: FontAwesomeIcons.github, onPressed: () {}),
+              Link(icon: FontAwesomeIcons.github, url: "https://github.com/Catalyst-101",),
               const SizedBox(width: 12),
-              Link(icon: FontAwesomeIcons.linkedinIn, onPressed: () {}),
+              Link(icon: FontAwesomeIcons.linkedinIn, url: "https://www.linkedin.com/in/smk-cs24/"),
               const SizedBox(width: 12),
-              Link(icon: Icons.email, onPressed: () {}),
+              Link(icon: Icons.email, url: "https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there"),
             ],
           ),
         ],

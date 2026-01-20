@@ -5,6 +5,7 @@ import 'package:portfolio/desktop/screens/faqs/faqs.dart';
 import 'package:portfolio/desktop/screens/home_page/home_page.dart';
 import 'package:portfolio/desktop/screens/myprojects/myprojects.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:portfolio/app_theme_controller.dart';
 
 void main() async 
 {
@@ -31,46 +32,70 @@ class MyApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: "font1"),
-      title: 'Khan Bhai',
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/",
-      onGenerateRoute: (settings) 
-      {
-        Widget page;
-        switch (settings.name) 
-        {
+    final controller = AppThemeController.instance;
 
-          case '/faqs':
-            page = FAQs();
-            break;
+    final base = ThemeData(
+      useMaterial3: true,
+      fontFamily: "font1",
+    );
 
-          case '/aboutme':
-            page = AboutMe();
-            break;
+    final darkTheme = base.copyWith(
+      brightness: Brightness.dark,
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange, brightness: Brightness.dark),
+    );
 
-          case '/contact':
-            page = Contact();
-            break;
+    final lightTheme = base.copyWith(
+      brightness: Brightness.light,
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange, brightness: Brightness.light),
+    );
 
-          case '/myprojects':
-            page = MyProjects();
-            break;
-          
-          case "/":
-          default:
-            page = HomePage();
-            break;
-        }
+    return ValueListenableBuilder<bool>(
+      valueListenable: controller.isDark,
+      builder: (context, isDark, _) {
+        return MaterialApp(
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+          title: 'Khan Bhai',
+          debugShowCheckedModeBanner: false,
+          initialRoute: "/",
+          onGenerateRoute: (settings) 
+          {
+            Widget page;
+            switch (settings.name) 
+            {
 
-        return PageRouteBuilder(
-          settings: settings,
-          pageBuilder: (context, animation, secondaryAnimation) => page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
+              case '/faqs':
+                page = FAQs();
+                break;
+
+              case '/aboutme':
+                page = AboutMe();
+                break;
+
+              case '/contact':
+                page = Contact();
+                break;
+
+              case '/myprojects':
+                page = MyProjects();
+                break;
+              
+              case "/":
+              default:
+                page = HomePage();
+                break;
+            }
+
+            return PageRouteBuilder(
+              settings: settings,
+              pageBuilder: (context, animation, secondaryAnimation) => page,
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+              transitionDuration: const Duration(milliseconds: 300),
+            );
           },
-          transitionDuration: const Duration(milliseconds: 300),
         );
       },
     );

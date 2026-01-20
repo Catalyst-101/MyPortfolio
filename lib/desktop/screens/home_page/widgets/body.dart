@@ -101,6 +101,11 @@ class BodyDesktop extends StatelessWidget
                                 FontAwesomeIcons.linkedinIn,
                                 Icons.email,
                               ],
+                              urls: [
+                                'https://github.com/Catalyst-101',
+                                'https://www.linkedin.com/in/smk-cs24/',
+                                'https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there',
+                              ],
                             ),
                           ]
                         ],
@@ -112,6 +117,11 @@ class BodyDesktop extends StatelessWidget
                             FontAwesomeIcons.github,
                             FontAwesomeIcons.linkedinIn,
                             Icons.email,
+                          ],
+                          urls: [
+                            'https://github.com/Catalyst-101',
+                            'https://www.linkedin.com/in/smk-cs24/',
+                            'https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there',
                           ],
                           iconSize: 20,
                         ),
@@ -179,6 +189,11 @@ class BodyMobile extends StatelessWidget {
               FontAwesomeIcons.github,
               FontAwesomeIcons.linkedinIn,
               Icons.email,
+            ],
+            urls: [
+              'https://github.com/Catalyst-101',
+              'https://www.linkedin.com/in/smk-cs24/',
+              'https://mail.google.com/mail/?view=cm&fs=1&to=skyisblack95@gmail.com&su=Hello%20there&body=Hi%20there',
             ],
             spacing: 60,
             iconSize: isSmall ? 18 : 22,
@@ -341,15 +356,16 @@ class ButtonsRow extends StatelessWidget {
   }
 }
 
-
 class LinkVibration extends StatefulWidget {
   final List<IconData> icons;
   final double iconSize;
   final double spacing;
+  final List<String> urls; // added urls list
 
   const LinkVibration({
     super.key,
     required this.icons,
+    required this.urls, // required urls
     this.iconSize = 25,
     this.spacing = 60,
   });
@@ -366,6 +382,10 @@ class _LinkVibrationState extends State<LinkVibration>
   @override
   void initState() {
     super.initState();
+
+    assert(widget.icons.length == widget.urls.length,
+        'Icons and URLs length must be equal');
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2000),
@@ -398,7 +418,7 @@ class _LinkVibrationState extends State<LinkVibration>
                   icon: widget.icons[i],
                   size: widget.iconSize,
                   outlineColor: Colors.white,
-                  onPressed: () {},
+                  url: widget.urls[i],
                 ),
               );
             }),

@@ -22,9 +22,9 @@ class PortfolioTimeline extends StatelessWidget
       "desc": "Joined NUST Islamabad for BS Computer Science, learning coding languages, algorithms, and other technical skills."
     },
     {
-      "year": "2025",
-      "title": "Currently in 2nd Semester",
-      "desc": "Pursuing BS Computer Science at NUST with a CGPA of 3.82/4.00."
+      "year": "2026",
+      "title": "Currently in 4th Semester",
+      "desc": "Pursuing BS Computer Science at NUST with a CGPA of 3.79/4.00."
     },
   ];
 

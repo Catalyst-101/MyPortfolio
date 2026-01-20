@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class GradientPalette {
   final int index;
+  /// Theme must NOT affect which background gradient is shown.
+  /// The same 10 gradients are used in both light and dark mode.
   final bool isDark;
 
   GradientPalette({required this.index, this.isDark = false});
 
   Gradient get gradient {
+    
     final gradients = isDark ? _darkGradients : _lightGradients;
+
     final safeIndex = index % gradients.length;
     return gradients[safeIndex];
   }

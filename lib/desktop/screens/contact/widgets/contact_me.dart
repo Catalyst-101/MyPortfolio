@@ -73,6 +73,7 @@ class _ContactMeState extends State<ContactMe> {
                         icon: FontAwesomeIcons.envelope,
                         size: 20,
                         color: Colors.white,
+                        url: "",
                       ),
               
                       SizedBox(width: 10),
@@ -98,6 +99,7 @@ class _ContactMeState extends State<ContactMe> {
                         icon: FontAwesomeIcons.phone,
                         size: 20,
                         color: Colors.white,
+                        url: "",
                       ),
               
                       SizedBox(width: 10),
@@ -123,6 +125,7 @@ class _ContactMeState extends State<ContactMe> {
                         icon: FontAwesomeIcons.locationDot,
                         size: 20,
                         color: Colors.white,
+                        url: "",
                       ),
               
                       SizedBox(width: 10),

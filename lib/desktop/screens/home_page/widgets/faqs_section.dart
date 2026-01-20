@@ -5,6 +5,8 @@ class FAQSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     final faqs = [
       {
         "q": "What services do you provide?",
@@ -40,42 +42,36 @@ class FAQSection extends StatelessWidget {
       },
     ];
 
+    double titleSize = screenWidth < 600 ? 20 : (screenWidth < 900 ? 22 : 24);
+    double subtitleSize = screenWidth < 600 ? 12 : 14;
+    double cardQuestionSize = screenWidth < 600 ? 14 : 16;
+    double cardAnswerSize = screenWidth < 600 ? 12 : 13;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 120),
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: screenWidth < 600 ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
-          // Header + Button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Frequently Asked Questions",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    "Find answers to common questions about me.",
-                    style: TextStyle(fontSize: 14, color: Colors.white70),
-                  ),
-                ],
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Text(
-                    "View All",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+          if (screenWidth > 800)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Frequently Asked Questions",
+                      style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                  ),
+                    const SizedBox(height: 5),
+                    Text(
+                      "Find answers to common questions about me.",
+                      style: TextStyle(fontSize: subtitleSize, color: Colors.white70),
+                    ),
+                  ],
+                ),
+                if (screenWidth <= 900)
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(
@@ -87,37 +83,125 @@ class FAQSection extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                     ),
+                  )
+                else
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text(
+                        "View All",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.open_in_new,
+                          color: Colors.white,
+                          size: 22,
+                        ),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-
-            ],
-          ),
+              ],
+            )
+          else
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Frequently Asked Questions",
+                  style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  "Find answers to common questions about me.",
+                  style: TextStyle(fontSize: subtitleSize, color: Colors.white70),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
 
           const SizedBox(height: 30),
 
-          Row(
-            children: [
-              Expanded(child: _FAQCard(faqs[0]["q"]!, faqs[0]["a"]!)),
-              Expanded(child: _FAQCard(faqs[1]["q"]!, faqs[1]["a"]!)),
-              Expanded(child: _FAQCard(faqs[2]["q"]!, faqs[2]["a"]!)),
-            ],
-          ),
-
-          Row(
-            children: [
-              Expanded(child: _FAQCard(faqs[3]["q"]!, faqs[3]["a"]!)),
-              Expanded(child: _FAQCard(faqs[4]["q"]!, faqs[4]["a"]!)),
-            ],
-          ),
-
-          Row(
-            children: [
-              Expanded(child: _FAQCard(faqs[5]["q"]!, faqs[5]["a"]!)),
-              Expanded(child: _FAQCard(faqs[6]["q"]!, faqs[6]["a"]!)),
-              Expanded(child: _FAQCard(faqs[7]["q"]!, faqs[7]["a"]!)),
-            ],
-          ),
+          if (screenWidth > 900) ...[
+            Row(
+              children: [
+                Expanded(child: _FAQCard(faqs[0]["q"]!, faqs[0]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[1]["q"]!, faqs[1]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[2]["q"]!, faqs[2]["a"]!, cardQuestionSize, cardAnswerSize)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(child: _FAQCard(faqs[3]["q"]!, faqs[3]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[4]["q"]!, faqs[4]["a"]!, cardQuestionSize, cardAnswerSize)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(child: _FAQCard(faqs[5]["q"]!, faqs[5]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[6]["q"]!, faqs[6]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[7]["q"]!, faqs[7]["a"]!, cardQuestionSize, cardAnswerSize)),
+              ],
+            ),
+          ] else if (screenWidth >= 700) ...[
+            Row(
+              children: [
+                Expanded(child: _FAQCard(faqs[0]["q"]!, faqs[0]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[1]["q"]!, faqs[1]["a"]!, cardQuestionSize, cardAnswerSize)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(child: _FAQCard(faqs[2]["q"]!, faqs[2]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[3]["q"]!, faqs[3]["a"]!, cardQuestionSize, cardAnswerSize)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(child: _FAQCard(faqs[5]["q"]!, faqs[5]["a"]!, cardQuestionSize, cardAnswerSize)),
+                Expanded(child: _FAQCard(faqs[6]["q"]!, faqs[6]["a"]!, cardQuestionSize, cardAnswerSize)),
+              ],
+            ),
+          ] else ...[
+            for (int i = 0; i < 4; i++)
+              _FAQCard(faqs[i]["q"]!, faqs[i]["a"]!, cardQuestionSize, cardAnswerSize),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "View All",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.open_in_new,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                  ),
+                ),
+              ],
+            ),
+          ]
         ],
       ),
     );
@@ -127,8 +211,10 @@ class FAQSection extends StatelessWidget {
 class _FAQCard extends StatefulWidget {
   final String question;
   final String answer;
+  final double qSize;
+  final double aSize;
 
-  const _FAQCard(this.question, this.answer);
+  const _FAQCard(this.question, this.answer, this.qSize, this.aSize);
 
   @override
   State<_FAQCard> createState() => _FAQCardState();
@@ -146,7 +232,6 @@ class _FAQCardState extends State<_FAQCard> {
         duration: const Duration(milliseconds: 200),
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         padding: const EdgeInsets.all(16),
-        height: 150,
         decoration: BoxDecoration(
           color: const Color(0xFF1A1A1A),
           borderRadius: BorderRadius.circular(16),
@@ -164,16 +249,17 @@ class _FAQCardState extends State<_FAQCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(widget.question, textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(
+              widget.question,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: widget.qSize, fontWeight: FontWeight.bold, color: Colors.white),
+            ),
             const SizedBox(height: 8),
-            Expanded(
-              child: Text(
-                widget.answer,
-                style: const TextStyle(fontSize: 13, color: Colors.white70),
-                overflow: TextOverflow.fade,
-                textAlign: TextAlign.center,
-              ),
+            Text(
+              widget.answer,
+              style: TextStyle(fontSize: widget.aSize, color: Colors.white70),
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.center,
             ),
           ],
         ),

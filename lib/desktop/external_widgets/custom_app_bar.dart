@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/app_theme_controller.dart';
 
 class CustomAppBar extends StatefulWidget 
 {
@@ -37,6 +38,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final onSurface = scheme.onSurface;
+    final surface = scheme.surface;
+    final borderColor = scheme.outlineVariant;
+
     return SizedBox(
       height: 72,
       child: Stack(
@@ -45,11 +51,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
             duration: const Duration(milliseconds: 300),
             decoration: BoxDecoration(
               color: hasScrolled
-                  ? Colors.black.withValues(alpha: 0.2)
+                  ? surface.withValues(alpha: 0.65)
                   : Colors.transparent,
               border: hasScrolled
-                  ? const Border(
-                      bottom: BorderSide(color: Colors.white, width: 1),
+                  ? Border(
+                      bottom: BorderSide(color: borderColor, width: 1),
                     )
                   : null,
             ),
@@ -66,7 +72,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: onSurface,
                   ),
                 ),
 
@@ -90,7 +96,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
                 Builder(
                     builder: (context) => IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.white, size: 28),
+                      icon: Icon(Icons.menu, color: onSurface, size: 28),
                       onPressed: () => Scaffold.of(context).openEndDrawer(),
                     ),
                   ),
@@ -130,6 +136,10 @@ class _NavBarState extends State<_NavBar>
   @override
   Widget build(BuildContext context)
   {
+    final scheme = Theme.of(context).colorScheme;
+    final baseColor = scheme.onSurface.withValues(alpha: 0.75);
+    final hoverColor = scheme.onSurface;
+
     return Row(
       children: List.generate(navItems.length, (i)
       {
@@ -148,7 +158,7 @@ class _NavBarState extends State<_NavBar>
                   AnimatedDefaultTextStyle(
                     duration: const Duration(milliseconds: 200),
                     style: TextStyle(
-                      color: isHovered ? Colors.white : Colors.white70,
+                      color: isHovered ? hoverColor : baseColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                       fontFamily: "font1",
@@ -264,37 +274,39 @@ class _ThemeToggleButton extends StatefulWidget
 class _ThemeToggleButtonState extends State<_ThemeToggleButton>
     with SingleTickerProviderStateMixin
 {
-  bool isDark = true;
-
-  void _toggleTheme()
-  {
-    setState(() => isDark = !isDark);
-  }
-
   @override
   Widget build(BuildContext context)
   {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
-      transitionBuilder: (child, animation)
-      {
-        return RotationTransition(
-          turns: Tween(begin: 0.75, end: 1.0).animate(animation),
-          child: FadeTransition(
-            opacity: animation,
-            child: child,
+    final controller = AppThemeController.instance;
+
+    return ValueListenableBuilder<bool>(
+      valueListenable: controller.isDark,
+      builder: (context, isDark, _) {
+        final iconColor = Theme.of(context).colorScheme.onSurface;
+
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          transitionBuilder: (child, animation)
+          {
+            return RotationTransition(
+              turns: Tween(begin: 0.75, end: 1.0).animate(animation),
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+            );
+          },
+          child: IconButton(
+            key: ValueKey<bool>(isDark),
+            icon: Icon(
+              isDark ? Icons.nightlight_round : Icons.wb_sunny,
+              color: iconColor,
+            ),
+            tooltip: isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+            onPressed: controller.toggle,
           ),
         );
       },
-      child: IconButton(
-        key: ValueKey<bool>(isDark),
-        icon: Icon(
-          isDark ? Icons.nightlight_round : Icons.wb_sunny,
-          color: Colors.white,
-        ),
-        tooltip: isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode',
-        onPressed: _toggleTheme,
-      ),
     );
   }
 }
@@ -313,8 +325,9 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Drawer(
-      backgroundColor: Colors.black.withValues(alpha: 0.7), // transparent effect
+      backgroundColor: scheme.surface.withValues(alpha: 0.92), // transparent effect
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -355,12 +368,13 @@ class CustomDrawer extends StatelessWidget {
   }
 
   Widget _drawerItem(BuildContext context, String title, String nav, String currentRoute) {
+    final scheme = Theme.of(context).colorScheme;
     final isActive = currentRoute == nav;
     return ListTile(
       title: Text(
         title,
         style: TextStyle(
-          color: isActive ? Colors.deepOrange : Colors.white,
+          color: isActive ? Colors.deepOrange : scheme.onSurface,
           fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
         ),
       ),
