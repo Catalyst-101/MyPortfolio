@@ -130,8 +130,8 @@ class _NavBar extends StatefulWidget
 class _NavBarState extends State<_NavBar>
 {
   int hoveredIndex = -1;
-  final navItems = ["Home", "Khan News","My Projects","About Me", "FAQS", "Contact"];
-  final nav = ["/", "/khannews", "/myprojects", "/aboutme", "/faqs", "/contact"];
+  final navItems = ["Home","My Projects","About Me", "FAQS", "Contact"];
+  final nav = ["/", "/myprojects", "/aboutme", "/faqs", "/contact"];
 
   @override
   Widget build(BuildContext context)

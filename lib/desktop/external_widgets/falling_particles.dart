@@ -57,8 +57,14 @@ class _FallingParticlesState extends State<FallingParticles>
 
   @override
   Widget build(BuildContext context) {
+    final isDark =
+        Theme.of(context).brightness == Brightness.dark;
+    final particleColor = isDark
+        ? const Color.fromARGB(33, 255, 255, 255)
+        : const Color.fromARGB(40, 0, 0, 0);
+
     return CustomPaint(
-      painter: ParticlePainter(particles),
+      painter: ParticlePainter(particles, particleColor),
       size: Size.infinite,
     );
   }
@@ -86,13 +92,15 @@ class Particle {
 
 class ParticlePainter extends CustomPainter {
   final List<Particle> particles;
-  ParticlePainter(this.particles);
+  final Color color;
+
+  ParticlePainter(this.particles, this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
     for (var p in particles) {
       final offset = Offset(p.x * size.width, p.y * size.height);
-      final paint = Paint()..color = p.color;
+      final paint = Paint()..color = color;
 
       switch (p.shape) {
         case ParticleShape.circle:
